@@ -1,13 +1,13 @@
 ﻿@model CollectionItem
 
-<form method="post" asp-action="Delete">
+<form method="post" asp-action="Edit">
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
-			<h2 class="text-primary">Delete Item</h2>
+			<h2 class="text-primary">Edit Item</h2>
 		</div>
 		<div class="mb-3">
 			<label asp-for="Name">Name</label>
-			<input asp-for="Name" disabled class="form-control"/>
+			<input asp-for="Name" disabled class="form-control" />
 		</div>
 		<div class="mb-3">
 			<label asp-for="Description">Description</label>
@@ -15,13 +15,16 @@
 		</div>
 		<div class="mb-3">
 			<label asp-for="Price">Price</label>
-			<input asp-for="Price" disabled class="form-control" />
+			<div class="input-group">
+				<span class="input-group-text">€</span>
+				<input asp-for="Price" disabled class="form-control" />
+			</div>
 		</div>
 		<div class="mb-3">
-			<label asp-for="CollectionName">CollectionName</label>
-			<input asp-for="CollectionName" disabled class="form-control" />
+			<label asp-for="CollectionNameId" class="control-label"></label>
+			<select asp-for="CollectionNameId" asp-items="@ViewBag.CollectionNames" disabled class="form-control"></select>
 		</div>
-		<button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+		<button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
 		<a asp-controller="CollectionItem" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
 	</div>
 </form>

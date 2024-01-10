@@ -1,4 +1,5 @@
-﻿@model CollectionItem
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model CollectionItem
 
 <form method="post">
 	<div class="border p-3 mt-4">
@@ -15,11 +16,14 @@
 		</div>
 		<div class="mb-3">
 			<label asp-for="Price">Price</label>
-			<input asp-for="Price" class="form-control" />
+			<div class="input-group">
+				<span class="input-group-text">€</span>
+				<input asp-for="Price" class="form-control" />
+			</div>
 		</div>
 		<div class="mb-3">
-			<label asp-for="CollectionName">CollectionName</label>
-			<input asp-for="CollectionName" class="form-control" />
+			<label asp-for="CollectionNameId" class="control-label"></label>
+			<select asp-for="CollectionNameId" asp-items="@ViewBag.CollectionNames" class="form-control"></select>
 		</div>
 		<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
 		<a asp-controller="CollectionItem" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>

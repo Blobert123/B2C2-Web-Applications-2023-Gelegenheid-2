@@ -2,6 +2,8 @@
 using B2C2_Web_Applications_2023_Gelegenheid_2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
 {
@@ -14,15 +16,26 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             _db = db;
         }
 
-        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
-            IEnumerable<CollectionName> objCollectionNameList = _db.CollectionNames;
-            return View(objCollectionNameList);
+            var collectionName = _db.CollectionNames
+                .Include(ci => ci.Admin)
+                .ToList();
+
+            return View(collectionName);
         }
 
         public IActionResult Create()
         {
+            var admins = _db.Admins
+            .Select(cn => new SelectListItem
+            {
+                Value = cn.Id.ToString(),
+                Text = cn.Name
+            })
+            .ToList();
+
+            ViewBag.Admins = admins;
             return View();
         }
 
@@ -53,6 +66,15 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
                 return NotFound();
             }
 
+            var admins = _db.Admins
+            .Select(cn => new SelectListItem
+            {
+                Value = cn.Id.ToString(),
+                Text = cn.Name
+            })
+            .ToList();
+            ViewBag.Admins = admins;
+
             return View(itemFromDB);
         }
 
@@ -82,6 +104,16 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             {
                 return NotFound();
             }
+
+            var admins = _db.Admins
+            .Select(cn => new SelectListItem
+            {
+                Value = cn.Id.ToString(),
+                Text = cn.Name
+            })
+            .ToList();
+
+            ViewBag.Admins = admins;
 
             return View(itemFromDB);
         }

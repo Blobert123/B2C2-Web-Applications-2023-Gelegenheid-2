@@ -18,5 +18,17 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Data
 
         public DbSet<User> Users { get; set; }
 
-    }
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<CollectionItem>()
+				.HasOne(ci => ci.CollectionName)
+				.WithMany()
+				.HasForeignKey(ci => ci.CollectionNameId);
+
+			modelBuilder.Entity<CollectionName>()
+				.HasOne(cn => cn.Admin)
+				.WithMany()
+				.HasForeignKey(cn => cn.AdminId);
+		}
+	}
 }

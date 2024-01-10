@@ -1,6 +1,8 @@
 ﻿using B2C2_Web_Applications_2023_Gelegenheid_2.Data;
 using B2C2_Web_Applications_2023_Gelegenheid_2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
 {
@@ -15,12 +17,24 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<CollectionItem> objCollectionItemList = _db.CollectionItems;
-            return View(objCollectionItemList);
+            var collectionItems = _db.CollectionItems
+                .Include(ci => ci.CollectionName)
+                .ToList();
+
+            return View(collectionItems);
         }
 
         public IActionResult Create()
         {
+            var collectionNames = _db.CollectionNames
+            .Select(cn => new SelectListItem
+            {
+                Value = cn.Id.ToString(),
+                Text = cn.Name
+            })
+            .ToList();
+
+            ViewBag.CollectionNames = collectionNames;
             return View();
         }
 
@@ -51,6 +65,16 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
                 return NotFound();
             }
 
+            var collectionNames = _db.CollectionNames
+            .Select(cn => new SelectListItem
+            {
+                Value = cn.Id.ToString(),
+                Text = cn.Name
+            })
+            .ToList();
+
+            ViewBag.CollectionNames = collectionNames;
+
             return View(itemFromDB);
         }
 
@@ -80,6 +104,16 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             {
                 return NotFound();
             }
+
+            var collectionNames = _db.CollectionNames
+            .Select(cn => new SelectListItem
+            {
+                Value = cn.Id.ToString(),
+                Text = cn.Name
+            })
+            .ToList();
+
+            ViewBag.CollectionNames = collectionNames;
 
             return View(itemFromDB);
         }
