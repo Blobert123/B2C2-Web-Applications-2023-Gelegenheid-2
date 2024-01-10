@@ -25,6 +25,12 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             return View(collectionName);
         }
 
+        public IActionResult Index2()
+        {
+            var collectionNames = _db.CollectionNames.ToList();
+            return View(collectionNames);
+        }
+
         public IActionResult Create()
         {
             var admins = _db.Admins

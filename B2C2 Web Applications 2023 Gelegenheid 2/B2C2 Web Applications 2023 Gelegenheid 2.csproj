@@ -21,4 +21,11 @@
     <Folder Include="Models\ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\CollectionName\Create.cshtml" />
+    <None Include="Views\CollectionName\Delete.cshtml" />
+    <None Include="Views\CollectionName\Edit.cshtml" />
+    <None Include="Views\CollectionName\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

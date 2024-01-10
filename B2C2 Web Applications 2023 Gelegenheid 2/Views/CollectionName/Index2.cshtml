@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CollectionName>
+@{
+    ViewData["Title"] = "Index2";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Collections</h2>
+        </div>
+    </div>
+</div>
+
+
+<ul>
+    @foreach (var obj in Model)
+    {
+        <li>
+            <a asp-controller="CollectionItem" asp-action="IndexFiltered" asp-route-id="@obj.Id">
+                @obj.Name
+            </a>
+        </li>
+    }
+</ul>

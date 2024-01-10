@@ -24,6 +24,25 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             return View(collectionItems);
         }
 
+        public IActionResult IndexFiltered(int? id)
+        {
+            var collectionNameId = _db.CollectionItems
+                .Include(ci => ci.CollectionName)
+                .Where(ci => ci.CollectionNameId == id)
+                .ToList();
+
+            ViewBag.CollectionNameId = id;
+
+            var collectionName = _db.CollectionNames
+                .Where(cn => cn.Id == id)
+                .Select(cn => cn.Name)
+                .FirstOrDefault();
+
+            ViewBag.CollectionNameName = collectionName;
+
+            return View(collectionNameId);
+        }
+
         public IActionResult Create()
         {
             var collectionNames = _db.CollectionNames
