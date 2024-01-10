@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Transactions;
 
 namespace B2C2_Web_Applications_2023_Gelegenheid_2.Models
 {
@@ -14,6 +15,8 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Models
 
         [Required]
         public float Price { get; set; }
+
+        public int CollectionNameId { get; set; }
 
         public CollectionName? CollectionName { get; set; }
 

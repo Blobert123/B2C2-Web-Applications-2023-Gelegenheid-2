@@ -12,6 +12,8 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Models
 
         public string? Description { get; set; }
 
+        public int AdminId { get; set; }
+
         public Admin? Admin { get; set; }
     }
 }
