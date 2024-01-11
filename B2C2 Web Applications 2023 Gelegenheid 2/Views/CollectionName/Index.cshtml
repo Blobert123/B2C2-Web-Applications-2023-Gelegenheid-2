@@ -1,16 +1,16 @@
 ﻿@model  IEnumerable<CollectionName>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Collections - Admin";
 }
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Collection Names</h2>
+            <h2 class="text-primary">Collections - Admin</h2>
         </div>
         <div class="col-6 text-end">
             <a asp-controller="CollectionName" asp-action="Create" class="btn btn-primary">
-                Add new item
+                Add new collection
             </a>
         </div>
     </div>
@@ -37,7 +37,7 @@
                 <td width="25%">
                     @obj.Name
                 </td>
-                <td width="25%">
+                <td width="50%">
                     @obj.Description
                 </td>
                 <td width="25%">

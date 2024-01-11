@@ -24,25 +24,6 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             return View(collectionItems);
         }
 
-        public IActionResult IndexFiltered(int? id)
-        {
-            var collectionNameId = _db.CollectionItems
-                .Include(ci => ci.CollectionName)
-                .Where(ci => ci.CollectionNameId == id)
-                .ToList();
-
-            ViewBag.CollectionNameId = id;
-
-            var collectionName = _db.CollectionNames
-                .Where(cn => cn.Id == id)
-                .Select(cn => cn.Name)
-                .FirstOrDefault();
-
-            ViewBag.CollectionNameName = collectionName;
-
-            return View(collectionNameId);
-        }
-
         public IActionResult Create()
         {
             var collectionNames = _db.CollectionNames
@@ -151,5 +132,40 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult IndexFiltered(int? id)
+        {
+            var collectionNameId = _db.CollectionItems
+                .Include(ci => ci.CollectionName)
+                .Where(ci => ci.CollectionNameId == id)
+                .ToList();
+
+            ViewBag.CollectionNameId = id;
+
+            var collectionName = _db.CollectionNames
+                .Where(cn => cn.Id == id)
+                .Select(cn => cn.Name)
+                .FirstOrDefault();
+
+            ViewBag.CollectionNameName = collectionName;
+
+            return View(collectionNameId);
+        }
+
+        public IActionResult Search(string searchTerm)
+        {
+            var searchResults = _db.CollectionItems
+                .Include(ci => ci.CollectionName)
+                .Where(ci => ci.Name.Contains(searchTerm) ||
+                             ci.Description.Contains(searchTerm) ||
+                             ci.CollectionName.Name.Contains(searchTerm))
+                .ToList();
+
+            ViewBag.SearchTerm = searchTerm;
+            ViewBag.NoResults = searchResults.Count == 0;
+
+            return View(searchResults);
+        }
+
     }
 }

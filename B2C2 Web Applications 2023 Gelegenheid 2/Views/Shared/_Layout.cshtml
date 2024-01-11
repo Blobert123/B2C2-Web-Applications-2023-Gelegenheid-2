@@ -23,16 +23,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CollectionItem" asp-action="Index">CollectionItem</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="CollectionItem" asp-action="Index">All items</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CollectionName" asp-action="Index">CollectionName</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="CollectionName" asp-action="Index">Collections Admin</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="CollectionName" asp-action="Index2">Collections</a>
                         </li>
                     </ul>
                 </div>
+                <form asp-controller="CollectionItem" asp-action="Search" method="get">
+                    <label for="searchTerm">Search:</label>
+                    <input type="text" name="searchTerm" />
+                    <input type="submit" value="Search" />
+                </form>
             </div>
         </nav>
     </header>

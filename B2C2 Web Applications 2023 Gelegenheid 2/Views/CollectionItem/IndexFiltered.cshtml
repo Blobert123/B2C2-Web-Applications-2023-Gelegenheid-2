@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CollectionItem>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = ViewBag.CollectionNameName;
 }
 
 <div class="container p-3">
@@ -43,16 +43,16 @@
                 <td width="20%">
                     @obj.Name
                 </td>
-                <td width="20%">
+                <td width="45%">
                     @obj.Description
                 </td>
-                <td width="20%">
+                <td width="5%">
                     € @obj.Price
                 </td>
-                <td width="20%">
+                <td width="15%">
                     @obj.CreationTime
                 </td>
-                <td width="20%">
+                <td width="15%">
                     @obj.CollectionName.Name
                 </td>
                 <td>
