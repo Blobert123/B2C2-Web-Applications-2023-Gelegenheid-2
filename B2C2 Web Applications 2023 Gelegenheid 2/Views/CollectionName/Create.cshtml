@@ -18,6 +18,12 @@
 			<select asp-for="AdminId" asp-items="@ViewBag.Admins" class="form-control"></select>
 		</div>
 		<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
-		<a asp-controller="CollectionName" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
+		<a href="javascript:void(0);" onclick="goBack()" class="btn btn-secondary" style="width: 150px">Back</a>
 	</div>
 </form>
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>

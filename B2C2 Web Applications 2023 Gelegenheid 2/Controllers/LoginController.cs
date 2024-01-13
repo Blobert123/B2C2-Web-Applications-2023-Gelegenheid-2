@@ -26,12 +26,10 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Check if it's an admin login
                 var admin = _db.Admins.FirstOrDefault(a => a.Name == model.UserName && a.Password == model.Password);
 
                 if (admin != null)
                 {
-                    // Set role for the admin
                     var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, admin.Name),
@@ -41,22 +39,17 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var authProperties = new AuthenticationProperties
                     {
-                        IsPersistent = false // Non-persistent cookie
+                        IsPersistent = false
                     };
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-                    // Admin login successful
-                    // Perform any necessary actions (e.g., set authentication cookie, redirect)
                     return RedirectToAction("Index", "Home");
                 }
-
-                // Check if it's a user login
                 var user = _db.Users.FirstOrDefault(u => u.Name == model.UserName && u.Password == model.Password);
 
                 if (user != null)
                 {
-                    // Set role for the user
                     var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.Name),
@@ -66,21 +59,15 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var authProperties = new AuthenticationProperties
                     {
-                        IsPersistent = false // Non-persistent cookie
+                        IsPersistent = false
                     };
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-                    // User login successful
-                    // Perform any necessary actions (e.g., set authentication cookie, redirect)
                     return RedirectToAction("Index", "Home");
                 }
-
-                // Invalid login credentials
                 ModelState.AddModelError(string.Empty, "Invalid username or password.");
             }
-
-            // If the model state is invalid or login fails, return to the login view
             return View("Index", model);
         }
 
