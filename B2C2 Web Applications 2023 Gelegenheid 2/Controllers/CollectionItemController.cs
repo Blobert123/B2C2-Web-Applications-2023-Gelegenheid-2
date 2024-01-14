@@ -17,19 +17,30 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
 
         public IActionResult Index()
         {
-            string loggedInUserName = User.Identity.Name;
+            if (User.IsInRole("User"))
+            {
+                string loggedInUserName = User.Identity.Name;
 
-            var loggedInUserId = _db.Users
-                .Where(u => u.Name == loggedInUserName)
-                .Select(u => u.Id)
-                .FirstOrDefault();
+                var loggedInUserId = _db.Users
+                    .Where(u => u.Name == loggedInUserName)
+                    .Select(u => u.Id)
+                    .FirstOrDefault();
 
-            var collectionItems = _db.CollectionItems
-                .Include(ci => ci.CollectionName)
-                .Where(ci => ci.UserId == loggedInUserId)
-                .ToList();
+                var collectionItems = _db.CollectionItems
+                    .Include(ci => ci.CollectionName)
+                    .Where(ci => ci.UserId == loggedInUserId)
+                    .ToList();
 
-            return View(collectionItems);
+                return View(collectionItems);
+            }
+            else
+            {
+                var collectionItems = _db.CollectionItems
+                   .Include(ci => ci.CollectionName)
+                   .ToList();
+
+                return View(collectionItems);
+            }
         }
 
         public IActionResult Create()
