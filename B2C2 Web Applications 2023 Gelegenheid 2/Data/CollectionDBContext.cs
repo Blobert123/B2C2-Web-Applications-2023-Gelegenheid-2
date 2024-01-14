@@ -29,6 +29,12 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Data
 				.HasOne(cn => cn.Admin)
 				.WithMany()
 				.HasForeignKey(cn => cn.AdminId);
-		}
+
+            modelBuilder.Entity<CollectionItem>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId);
+
+        }
 	}
 }

@@ -8,11 +8,14 @@
         <div class="col-6">
             <h2 class="text-primary">Items in the collection: @ViewBag.CollectionNameName</h2>
         </div>
-        <div class="col-6 text-end">
-            <a asp-controller="CollectionItem" asp-action="Create" class="btn btn-primary">
-                Add new item
-            </a>
-        </div>
+        @if (User.IsInRole("User"))
+        {
+            <div class="col-6 text-end">
+                <a asp-controller="CollectionItem" asp-action="Create" class="btn btn-primary">
+                    Add new item
+                </a>
+            </div>
+        }
     </div>
 </div>
 
@@ -34,6 +37,9 @@
             <th>
                 Collection
             </th>
+            <th>
+                Release Date
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -43,17 +49,20 @@
                 <td width="15%">
                     @obj.Name
                 </td>
-                <td width="40%">
+                <td width="38%">
                     @obj.Description
                 </td>
-                <td width="5%">
+                <td width="7%">
                     € @obj.Price
                 </td>
                 <td width="15%">
                     @obj.CreationTime
                 </td>
-                <td width="15%">
+                <td width="10%">
                     @obj.CollectionName.Name
+                </td>
+                <td width="15%">
+                    @obj.ReleaseDate.ToString("yyyy-MM-dd")
                 </td>
                 <td>
                     <div class="w-75" btn-group role="group">

@@ -12,5 +12,7 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Models
 
         [Required]
         public string? Password { get; set; }
+
+        public ICollection<CollectionItem> CollectionItems { get; set; }
     }
 }

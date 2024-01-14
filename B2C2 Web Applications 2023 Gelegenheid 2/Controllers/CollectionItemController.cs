@@ -17,11 +17,11 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
 
         public IActionResult Index()
         {
-            var collectionItems = _db.CollectionItems
+            var collectionItem = _db.CollectionItems
                 .Include(ci => ci.CollectionName)
                 .ToList();
 
-            return View(collectionItems);
+            return View(collectionItem);
         }
 
         public IActionResult Create()

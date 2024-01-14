@@ -4,6 +4,7 @@ using B2C2_Web_Applications_2023_Gelegenheid_2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace B2C2_Web_Applications_2023_Gelegenheid_2.Migrations
 {
     [DbContext(typeof(CollectionDBContext))]
-    partial class CollectionDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240114133617_CollectionItemExtraAtt")]
+    partial class CollectionItemExtraAtt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,14 +72,9 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CollectionNameId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CollectionItems");
                 });
@@ -136,15 +133,7 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("B2C2_Web_Applications_2023_Gelegenheid_2.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("CollectionName");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("B2C2_Web_Applications_2023_Gelegenheid_2.Models.CollectionName", b =>
