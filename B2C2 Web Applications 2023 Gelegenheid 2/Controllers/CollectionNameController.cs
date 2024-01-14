@@ -128,7 +128,13 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
             var obj = _db.CollectionNames.Find(id);
+
             if (obj == null)
             {
                 return NotFound();

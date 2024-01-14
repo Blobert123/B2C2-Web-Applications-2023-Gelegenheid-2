@@ -6,23 +6,28 @@
 			<h2 class="text-primary">Edit Item</h2>
 		</div>
 		<div class="mb-3">
-			<label asp-for="Name">Name</label>
+			<label asp-for="Name">Name:</label>
 			<input asp-for="Name" class="form-control"/>
 		</div>
 		<div class="mb-3">
-			<label asp-for="Description">Description</label>
+			<label asp-for="Description">Description:</label>
 			<input asp-for="Description" class="form-control" />
 		</div>
 		<div class="mb-3">
-			<label asp-for="Price">Price</label>
+			<label asp-for="Price">Price:</label>
 			<div class="input-group">
 				<span class="input-group-text">€</span>
 				<input asp-for="Price" class="form-control" />
 			</div>
 		</div>
 		<div class="mb-3">
-			<label asp-for="CollectionNameId" class="control-label"></label>
+			<label asp-for="CollectionNameId" class="control-label">Collection:</label>
 			<select asp-for="CollectionNameId" asp-items="@ViewBag.CollectionNames" class="form-control"></select>
+		</div>
+		<div class="form-group">
+			<label asp-for="ReleaseDate">Select Date:</label>
+			<input asp-for="ReleaseDate" type="date" class="form-control" />
+			<span asp-validation-for="ReleaseDate" class="text-danger"></span>
 		</div>
 		<button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
 		<a href="javascript:void(0);" onclick="goBack()" class="btn btn-secondary" style="width: 150px">Back</a>

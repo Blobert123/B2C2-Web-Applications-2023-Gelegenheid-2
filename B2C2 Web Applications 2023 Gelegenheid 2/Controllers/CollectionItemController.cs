@@ -17,11 +17,30 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
 
         public IActionResult Index()
         {
-            var collectionItems = _db.CollectionItems
-                .Include(ci => ci.CollectionName)
-                .ToList();
+            if (User.IsInRole("User"))
+            {
+                string loggedInUserName = User.Identity.Name;
 
-            return View(collectionItems);
+                var loggedInUserId = _db.Users
+                    .Where(u => u.Name == loggedInUserName)
+                    .Select(u => u.Id)
+                    .FirstOrDefault();
+
+                var collectionItems = _db.CollectionItems
+                    .Include(ci => ci.CollectionName)
+                    .Where(ci => ci.UserId == loggedInUserId)
+                    .ToList();
+
+                return View(collectionItems);
+            }
+            else
+            {
+                var collectionItems = _db.CollectionItems
+                   .Include(ci => ci.CollectionName)
+                   .ToList();
+
+                return View(collectionItems);
+            }
         }
 
         public IActionResult Create()
@@ -34,7 +53,17 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Controllers
             })
             .ToList();
 
+            var userName = _db.Users
+            .Select(u => new SelectListItem
+            {
+                Value = u.Id.ToString(),
+                Text = u.Name
+            })
+            .ToList();
+
             ViewBag.CollectionNames = collectionNames;
+            ViewBag.Users = userName;
+
             return View();
         }
 

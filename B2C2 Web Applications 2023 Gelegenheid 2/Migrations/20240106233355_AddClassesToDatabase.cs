@@ -68,7 +68,8 @@ namespace B2C2_Web_Applications_2023_Gelegenheid_2.Migrations
                     Price = table.Column<float>(type: "real", nullable: false),
                     CollectionNameId = table.Column<int>(type: "int", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeOnline = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

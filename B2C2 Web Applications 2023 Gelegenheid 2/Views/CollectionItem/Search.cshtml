@@ -31,6 +31,9 @@ else
                 <th>
                     Collection
                 </th>
+                <th>
+                    Release Date
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -40,17 +43,20 @@ else
                     <td width="20%">
                         @obj.Name
                     </td>
-                    <td width="45%">
+                    <td width="38%">
                         @obj.Description
                     </td>
-                    <td width="5%">
+                    <td width="7%">
                         € @obj.Price
                     </td>
                     <td width="15%">
                         @obj.CreationTime
                     </td>
-                    <td width="15%">
+                    <td width="10%">
                         @obj.CollectionName.Name
+                    </td>
+                    <td width="15%">
+                        @obj.ReleaseDate.ToString("dd-MM-yyyy")
                     </td>
                 </tr>
             }
