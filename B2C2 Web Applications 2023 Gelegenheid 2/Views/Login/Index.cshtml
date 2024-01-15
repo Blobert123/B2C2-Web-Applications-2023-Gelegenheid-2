@@ -66,3 +66,16 @@
 
     <div asp-validation-summary="All" class="text-danger"></div>
 }
+
+<script>
+    window.addEventListener('beforeunload', function (event) {
+        fetch('/Login/Logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'include'
+        });
+    });
+</script>
